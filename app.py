@@ -1,15 +1,15 @@
-from flask import Flask, request, render_template
+from flask import Flask
+import os
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
-def form():
-    if request.method == 'POST':
-        nome = request.form.get('fname')
-        sobrenome = request.form.get('lname')
-        return f"Seu nome é {nome} {sobrenome}"
-    return render_template("form.html")
-
+for entry in os.scandir('views'):
+    if entry.is_file():
+        classname = entry.name[:-3]
+        string = f'from views.{classname} import {classname}'
+        exec(string)
+        string = f'{classname}.register(app)'
+        exec(string)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
