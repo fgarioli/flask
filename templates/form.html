@@ -1,6 +1,17 @@
-<form action="{{ url_for("form") }}" method="post">
+
+{% if dados %}
+<form action="{{ url_for("CacaView:cadastrar_1", id = dados.id) }}" method="post">
+    <label for="id">Id: </label>
+    <input type="text" id="id" name="id"  value="{{ dados.id }}">
+{% else %}
+    <form action="{{ url_for("CacaView:cadastrar_0") }}" method="post">
+{% endif %}
 <label for="firstname">Nome: </label>
-<input type="text" id="firstname" name="fname" placeholder="Digite seu nome">
+<input type="text" id="firstname" name="nome" placeholder="Digite seu nome" {% if dados %} value="{{ dados.nome }}" {% endif %}>
 <label for="lastname">Sobrenome: </label>
-<input type="text" id="lastname" name="lname" placeholder="Digite seu sobrenome">
+<input type="text" id="lastname" name="sobrenome" placeholder="Digite seu sobrenome" {% if dados %} value="{{ dados.sobrenome }}" {% endif %}>
+<label for="cpf">CPF: </label>
+<input type="text" id="cpf" name="cpf" placeholder="Digite seu cpf" {% if dados %} value="{{ dados.cpf }}" {% endif %}>
+<label for="dataNasc">Data Nascimento: </label>
+<input type="text" id="dataNasc" name="dataNasc" placeholder="Digite a sua data de nascimento" {% if dados %} value="{{ dados.dataNasc }}" {% endif %}>
 <button type="submit">Enviar Dados</button>

@@ -1,0 +1,12 @@
+<ul>
+    {%for estudante in lista%}
+        <li>{{ estudante.id }} - 
+            <a href="{{ url_for("CacaView:form_1", id = estudante.id) }}">
+                {{ estudante.nome }}
+            </a>
+            <a href="{{ url_for("CacaView:deletar", id = estudante.id) }}">
+                Deletar
+            </a>
+        </li>
+    {%endfor%}
+</ul>
